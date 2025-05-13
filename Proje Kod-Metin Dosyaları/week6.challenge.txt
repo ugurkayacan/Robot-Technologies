@@ -1,0 +1,153 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+ 
+
+# Add project code in "main" 
+
+def main(): 
+
+ 
+
+     
+
+ 
+
+    brain.clear() 
+
+ 
+
+    drivetrain.set_drive_velocity(25, PERCENT) 
+
+    global control 
+
+    control=1 
+
+    
+
+     
+
+    drivetrain.drive(FORWARD) 
+
+    while 1<2: 
+
+        
+
+        while control<=3 and not left_bumper.pressed(): 
+
+       
+
+            while not down_eye.near_object(): 
+
+                wait(5, MSEC) 
+
+            drivetrain.stop() 
+
+            magnet.energize(BOOST) 
+
+            drivetrain.turn_to_rotation(180, DEGREES) 
+
+ 
+
+            drivetrain.drive(FORWARD) 
+
+            while not left_bumper.pressed(): 
+
+                wait(5, MSEC) 
+
+            drivetrain.drive_for(REVERSE, 200, MM) 
+
+            magnet.energize(DROP) 
+
+            drivetrain.drive_for(REVERSE,100,MM) 
+
+            drivetrain.turn_for(RIGHT, 180, DEGREES) 
+
+            drivetrain.drive(FORWARD)  
+
+             
+
+                 
+
+                
+
+            control=control+1 
+
+            
+
+            wait(5, MSEC) 
+
+         
+
+ 
+
+         
+
+        drivetrain.turn_for(RIGHT, 90, DEGREES)  
+
+        drivetrain.drive(FORWARD) 
+
+        while not (down_eye.detect(RED) or down_eye.detect(GREEN)): 
+
+            wait(5, MSEC) 
+
+ 
+
+         
+
+ 
+
+        control=1 
+
+        if down_eye.detect(RED): 
+
+             
+
+            drivetrain.stop() 
+
+            drivetrain.drive_for(FORWARD, 200, MM) 
+
+            drivetrain.turn_for(LEFT, 90, DEGREES) 
+
+            pass 
+
+        elif down_eye.detect(GREEN): 
+
+            drivetrain.stop() 
+
+            drivetrain.drive_for(FORWARD, 200, MM) 
+
+            drivetrain.turn_for(LEFT, 90, DEGREES) 
+
+       
+
+        wait(5, MSEC) 
+
+        stop_project() 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+
+ 

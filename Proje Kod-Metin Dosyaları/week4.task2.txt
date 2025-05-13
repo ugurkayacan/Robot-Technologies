@@ -1,0 +1,63 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+ 
+
+# Add project code in "main" 
+
+def main(): 
+
+    monitor_sensor("down_eye.brightness","down_eye.detect") 
+
+ 
+
+     
+
+    #while not down_eye.detect(RED): 
+
+       #drivetrain.drive(FORWARD) 
+
+       #wait(5, MSEC) 
+
+    drivetrain.drive(FORWARD) 
+
+    while not 28<down_eye.brightness(PERCENT)<31: 
+
+         
+
+        wait(5, MSEC) 
+
+ 
+
+    drivetrain.stop() 
+
+    stop_project() 
+
+ 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+
+ 

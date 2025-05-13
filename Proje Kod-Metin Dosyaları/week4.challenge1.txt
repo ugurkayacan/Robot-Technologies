@@ -1,0 +1,111 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+ 
+
+# Add project code in "main" 
+
+def main(): 
+
+    global cnt,Bsum,avg,control 
+
+    brain.clear() 
+
+    avg=0 
+
+    cnt=0 
+
+    Bsum=0 
+
+    control=0 
+
+    drivetrain.set_drive_velocity(30, PERCENT) 
+
+ 
+
+   
+
+    monitor_sensor("left_bumper.pressed") 
+
+     
+
+    monitor_variable("avg") 
+
+     
+
+ 
+
+    drivetrain.drive(FORWARD) 
+
+    while not left_bumper.pressed() : 
+
+        control=1 
+
+        while down_eye.brightness(PERCENT)<100:  
+
+            if control!=0:  
+
+                cnt=cnt+1 
+
+                Bsum=down_eye.brightness(PERCENT)+Bsum 
+
+                control=0 
+
+                pass 
+
+            wait(5, MSEC) 
+
+                
+
+        wait(5, MSEC) 
+
+    if Bsum==0: 
+
+        brain.print(Bsum,"Brightness is zero for black color") 
+
+        pass 
+
+    else: 
+
+        avg=Bsum/cnt 
+
+        pass 
+
+     
+
+    drivetrain.stop() 
+
+        
+
+    stop_project() 
+
+ 
+
+     
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+
+ 

@@ -1,0 +1,122 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+brain.clear() 
+
+def getLineBrightness(lineNo,lineBrightness): 
+
+    brain.print(f"The brightness of line {lineNo} is {lineBrightness}\n") 
+
+# Add project code in "main" 
+
+def main(): 
+
+    global  Bsum,cnt,control,avg 
+
+    cnt=0 
+
+    Bsum=0 
+
+    avg=0 
+
+    drivetrain.set_drive_velocity(100, PERCENT) 
+
+    monitor_sensor("left_bumper.pressed") 
+
+    monitor_variable("avg") 
+
+    drivetrain.drive(FORWARD) 
+
+    # while bumper is 0 continue the loop 
+
+    while not left_bumper.pressed() : 
+
+        control=1 
+
+    #while brightness is less than 100, continue the loop 
+
+        while down_eye.brightness(PERCENT)<100:  
+
+    #if control variable is not 0,add 1 to cnt and run func. 
+
+    #add 1 to Bsum variable and make 0  the control variable 
+
+            if control!=0: 
+
+ 
+
+                cnt=cnt+1 
+
+                getLineBrightness(cnt,down_eye.brightness(PERCENT)) 
+
+                brain.new_line() 
+
+                
+
+ 
+
+                Bsum=down_eye.brightness(PERCENT)+Bsum 
+
+                control=0 
+
+                pass 
+
+            wait(5, MSEC) 
+
+                
+
+        wait(5, MSEC) 
+
+    if Bsum==0: 
+
+        brain.print(Bsum,"Brightness is zero for black color") 
+
+        brain.new_line() 
+
+        pass 
+
+    else: 
+
+        avg=Bsum/cnt 
+
+        pass 
+
+     
+
+    drivetrain.stop() 
+
+    stop_project() 
+
+ 
+ 
+
+     
+
+ 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+
+ 

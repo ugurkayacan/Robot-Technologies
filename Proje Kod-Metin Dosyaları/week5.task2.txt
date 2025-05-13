@@ -1,0 +1,132 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+brain.clear() 
+
+#function is running 
+
+def getLineBrightness(*LineList): 
+
+    global Csum,avg,Linebrg 
+
+    avg=0 
+
+    Csum=0 
+
+     
+
+    for Linebrg in LineList: 
+
+        Csum+=float(Linebrg) 
+
+        wait(5, MSEC) 
+
+    length=len(LineList) 
+
+    avg=Csum/length 
+
+    brain.print(f"average brightness is {avg} for {length} lines") 
+
+     
+
+# Add project code in "main" 
+
+def main(): 
+
+ 
+
+    global control 
+
+     
+
+     
+
+    
+
+    monitor_sensor("left_bumper.pressed") 
+
+     
+
+    drivetrain.drive(FORWARD) 
+
+    #define the colors list 
+
+    colors=[] 
+
+    #if bumper is 0,continue the loop 
+
+    while not left_bumper.pressed() : 
+
+        control=1 
+
+    #if brightness is less than 100,continue the loop 
+
+        while down_eye.brightness(PERCENT)<100:  
+
+            if control!=0: 
+
+                colors.append(down_eye.brightness(PERCENT)) 
+
+                control=0 
+
+ 
+
+                pass 
+
+            wait(5, MSEC) 
+
+                
+
+        wait(5, MSEC) 
+
+    #run the function     
+
+    getLineBrightness(*colors) 
+
+   
+
+    brain.new_line() 
+
+    #write the colors list to consol 
+
+    brain.print(colors) 
+
+    
+
+    drivetrain.stop() 
+
+    stop_project() 
+
+ 
+ 
+
+     
+
+ 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+
+ 

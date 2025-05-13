@@ -1,0 +1,91 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+ 
+
+def getBrightness(color): 
+
+    colorDec={ 
+
+        58.7:"GREEN", 
+
+        11.4:"BLUE", 
+
+        29.9:"RED", 
+
+        100:"NONE" 
+
+ 
+
+    } 
+
+    return colorDec.get(color,"white") 
+
+ 
+
+# Add project code in "main" 
+
+def main(): 
+
+    global brg 
+
+     
+
+ 
+
+    while True: 
+
+        brg=getBrightness(down_eye.brightness(PERCENT)) 
+
+        if brg=="GREEN": 
+
+            drivetrain.turn_for(RIGHT,90,DEGREES) 
+
+        elif brg=="BLUE": 
+
+            drivetrain.turn_for(LEFT,90,DEGREES) 
+
+        elif brg=="RED": 
+
+            drivetrain.stop() 
+
+            break 
+
+        else: 
+
+            drivetrain.drive(FORWARD) 
+
+        wait(100, MSEC) 
+
+        stop_project() 
+
+ 
+ 
+ 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+
+ 

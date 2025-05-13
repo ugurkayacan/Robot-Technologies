@@ -1,0 +1,322 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+brain.clear() 
+
+#function is running 
+
+def getLineBrightness(*LineList): 
+
+    global Csum,avg,Line,dec,i,p,c,i 
+
+    avg=0 
+
+    Csum=0 
+
+    i=0 
+
+    p=0 
+
+    dec=0 
+
+    c=1 
+
+    line=0 
+
+    i=0 
+
+ 
+
+     
+
+     
+
+   
+
+     
+
+    
+
+     
+
+ 
+
+    while c<=5: 
+
+        p=0 
+
+        for Line in LineList: 
+
+            
+
+      
+
+            brain.print(f"{LineList[i]}") 
+
+             
+
+            dec=dec+(LineList[line]*pow(2,p)) 
+
+            p=p+1 
+
+            line=line+1 
+
+            i=i+1 
+
+          
+
+             
+
+            if p==8: 
+
+                 
+
+                brain.print(f"-->{dec}---") 
+
+                 
+
+                
+
+                   
+
+ 
+
+                 
+
+                i=line 
+
+                break 
+
+                pass 
+
+            wait(5, MSEC) 
+
+     
+
+        brain.print(chr(dec)) 
+
+     
+
+      
+
+        
+
+         
+
+        
+
+ 
+
+        brain.new_line() 
+
+        dec=0 
+
+        c=c+1 
+
+        wait(5, MSEC)   
+
+         
+
+                                                                                 
+
+ 
+ 
+ 
+
+         
+
+ 
+
+     
+
+# Add project code in "main" 
+
+def main(): 
+
+ 
+
+    global control,j,Turn_Control 
+
+    j=0 
+
+    Turn_Control=1 
+
+     
+
+    drivetrain.set_drive_velocity(70, PERCENT) 
+
+ 
+
+     
+
+     
+
+    
+
+    monitor_sensor("left_bumper.pressed") 
+
+     
+
+    drivetrain.drive(FORWARD) 
+
+ 
+
+    colors=[] 
+
+    while j<=8: 
+
+         #if bumper is 0,continue the loop 
+
+        while not left_bumper.pressed() : 
+
+            control=1 
+
+         
+
+            while down_eye.detect(BLUE):  
+
+                if control!=0: 
+
+                    colors.append(0) 
+
+                    control=0 
+
+ 
+
+                    pass 
+
+                wait(5,MSEC)     
+
+             
+
+            while down_eye.detect(GREEN):  
+
+                if control!=0: 
+
+                    colors.append(1) 
+
+                    control=0 
+
+ 
+
+                    pass 
+
+                wait(5,MSEC) 
+
+                
+
+            wait(5, MSEC) 
+
+            #if bumper is true and i variable is 8, break the loop. 
+
+        if left_bumper.pressed() and j==8: 
+
+            break 
+
+            pass 
+
+        #program is controlling the direction of robot 
+
+        if Turn_Control==1: 
+
+             
+
+            drivetrain.turn_for(RIGHT, 90, DEGREES) 
+
+            drivetrain.drive_for(FORWARD, 195, MM)#it can change becouse of internet connection 
+
+            drivetrain.turn_for(RIGHT,90,DEGREES) 
+
+            drivetrain.drive(FORWARD) 
+
+            Turn_Control=0 
+
+            
+
+         
+
+            pass 
+
+        else: 
+
+             
+
+            drivetrain.turn_for(LEFT, 90, DEGREES) 
+
+            drivetrain.drive_for(FORWARD, 195, MM)#it can change becouse of internet connection 
+
+            drivetrain.turn_for(LEFT,90,DEGREES) 
+
+            drivetrain.drive(FORWARD) 
+
+            Turn_Control=1 
+
+             
+
+                 
+
+            pass  
+
+            
+
+        j=j+1     
+
+ 
+
+        wait(5, MSEC) 
+
+    
+
+    #run the function     
+
+    getLineBrightness(*colors) 
+
+   
+
+    brain.new_line() 
+
+    #write the colors list to consol 
+
+    brain.print(colors) 
+
+    brain.new_line() 
+
+    
+
+    drivetrain.stop() 
+
+    stop_project() 
+
+ 
+
+     
+
+ 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+ 
+
+ 

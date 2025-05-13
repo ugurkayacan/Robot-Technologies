@@ -1,0 +1,516 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+brain.clear() 
+
+#function is running 
+
+def getLineBrightness(*LineList): 
+
+    global Csum,avg,Line,dec,i,p,c,i 
+
+    avg=0 
+
+    Csum=0 
+
+    i=0 
+
+    p=0 
+
+    dec=0 
+
+    c=1 
+
+    line=0 
+
+    i=0 
+
+   
+
+     
+
+    
+
+     
+
+ 
+
+    while c<=5: 
+
+        p=0 
+
+        for Line in LineList: 
+
+            
+
+      
+
+            brain.print(f"{LineList[i]}") 
+
+            dec=dec+(LineList[line]*pow(2,p)) 
+
+            p=p+1 
+
+            line=line+1 
+
+            i=i+1 
+
+          
+
+             
+
+            if p==8: 
+
+                 
+
+                brain.print(f"-->{dec}---") 
+
+                i=line 
+
+                break 
+
+                pass 
+
+            wait(5, MSEC) 
+
+     
+
+     
+
+     
+
+      
+
+        
+
+        if dec==65: 
+
+            brain.print("A") 
+
+        elif dec==66: 
+
+            brain.print("B") 
+
+        elif dec==67: 
+
+            brain.print("C") 
+
+        elif dec==68: 
+
+            brain.print("D") 
+
+        elif dec==69: 
+
+            brain.print("E") 
+
+        elif dec==70: 
+
+            brain.print("F") 
+
+        elif dec==71: 
+
+            brain.print("G") 
+
+        elif dec==72: 
+
+            brain.print("H") 
+
+        elif dec==73: 
+
+            brain.print("I") 
+
+        elif dec==74: 
+
+            brain.print("J") 
+
+        elif dec==75: 
+
+            brain.print("K") 
+
+        elif dec==76: 
+
+            brain.print("L") 
+
+        elif dec==77: 
+
+            brain.print("M") 
+
+        elif dec==78: 
+
+            brain.print("N") 
+
+        elif dec==79: 
+
+            brain.print("O") 
+
+        elif dec==80: 
+
+            brain.print("P") 
+
+        elif dec==81: 
+
+            brain.print("Q") 
+
+        elif dec==82: 
+
+            brain.print("R") 
+
+        elif dec==83: 
+
+            brain.print("S") 
+
+        elif dec==84: 
+
+            brain.print("T") 
+
+        elif dec==85: 
+
+            brain.print("U") 
+
+        elif dec==86: 
+
+            brain.print("V") 
+
+        elif dec==87: 
+
+            brain.print("W") 
+
+        elif dec==88: 
+
+            brain.print("X") 
+
+        elif dec==89: 
+
+            brain.print("Y") 
+
+        elif dec==90: 
+
+            brain.print("Z") 
+
+ 
+
+        elif dec==97: 
+
+            brain.print("a") 
+
+        elif dec==98: 
+
+            brain.print("b") 
+
+        elif dec==99: 
+
+            brain.print("c") 
+
+        elif dec==100: 
+
+            brain.print("d") 
+
+        elif dec==101: 
+
+            brain.print("e") 
+
+        elif dec==102: 
+
+            brain.print("f") 
+
+        elif dec==103: 
+
+            brain.print("g") 
+
+        elif dec==104: 
+
+            brain.print("h") 
+
+        elif dec==105: 
+
+            brain.print("i") 
+
+        elif dec==106: 
+
+            brain.print("j") 
+
+        elif dec==107: 
+
+            brain.print("k") 
+
+        elif dec==108: 
+
+            brain.print("l") 
+
+        elif dec==109: 
+
+            brain.print("m") 
+
+        elif dec==110: 
+
+            brain.print("n") 
+
+        elif dec==111: 
+
+            brain.print("o") 
+
+        elif dec==112: 
+
+            brain.print("p") 
+
+        elif dec==113: 
+
+            brain.print("q") 
+
+        elif dec==114: 
+
+            brain.print("r") 
+
+        elif dec==115: 
+
+            brain.print("s") 
+
+        elif dec==116: 
+
+            brain.print("t") 
+
+        elif dec==117: 
+
+            brain.print("u") 
+
+        elif dec==118: 
+
+            brain.print("v") 
+
+        elif dec==119: 
+
+            brain.print("w") 
+
+        elif dec==120: 
+
+            brain.print("x") 
+
+        elif dec==121: 
+
+            brain.print("y") 
+
+        elif dec==122: 
+
+            brain.print("z") 
+
+        else: 
+
+            brain.print("zero") 
+
+        
+
+ 
+
+        brain.new_line() 
+
+        dec=0 
+
+        c=c+1 
+
+        wait(5, MSEC)   
+
+         
+
+                                                                                 
+
+ 
+ 
+ 
+
+         
+
+ 
+
+     
+
+# Add project code in "main" 
+
+def main(): 
+
+ 
+
+    global control,j,Turn_Control 
+
+    j=0 
+
+    Turn_Control=1 
+
+     
+
+    drivetrain.set_drive_velocity(70, PERCENT) 
+
+ 
+
+     
+
+     
+
+    
+
+    monitor_sensor("left_bumper.pressed") 
+
+     
+
+    drivetrain.drive(FORWARD) 
+
+ 
+
+    colors=[] 
+
+    while j<=8: 
+
+         #if bumper is 0,continue the loop 
+
+        while not left_bumper.pressed() : 
+
+            control=1 
+
+         
+
+            while down_eye.detect(BLUE):  
+
+                if control!=0: 
+
+                    colors.append(0) 
+
+                    control=0 
+
+ 
+
+                    pass 
+
+                wait(5,MSEC)     
+
+             
+
+            while down_eye.detect(GREEN):  
+
+                if control!=0: 
+
+                    colors.append(1) 
+
+                    control=0 
+
+ 
+
+                    pass 
+
+                wait(5,MSEC) 
+
+                
+
+            wait(5, MSEC) 
+
+            #if bumper is true and i variable is 8, break the loop. 
+
+        if left_bumper.pressed() and j==8: 
+
+            break 
+
+            pass 
+
+        #program is controlling the direction of robot 
+
+        if Turn_Control==1: 
+
+             
+
+            drivetrain.turn_for(RIGHT, 90, DEGREES) 
+
+            drivetrain.drive_for(FORWARD, 194, MM)#it can change becouse of internet connection 
+
+            drivetrain.turn_for(RIGHT,90,DEGREES) 
+
+            drivetrain.drive(FORWARD) 
+
+            Turn_Control=0 
+
+            
+
+         
+
+            pass 
+
+        else: 
+
+             
+
+            drivetrain.turn_for(LEFT, 90, DEGREES) 
+
+            drivetrain.drive_for(FORWARD, 194, MM)#it can change becouse of internet connection 
+
+            drivetrain.turn_for(LEFT,90,DEGREES) 
+
+            drivetrain.drive(FORWARD) 
+
+            Turn_Control=1 
+
+             
+
+                 
+
+            pass  
+
+            
+
+        j=j+1     
+
+ 
+
+        wait(5, MSEC) 
+
+    
+
+    #run the function     
+
+    getLineBrightness(*colors) 
+
+   
+
+    brain.new_line() 
+
+    #write the colors list to consol 
+
+    brain.print(colors) 
+
+    brain.new_line() 
+
+    
+
+    drivetrain.stop() 
+
+    stop_project() 
+
+ 
+
+     
+
+ 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+ 
+
+ 

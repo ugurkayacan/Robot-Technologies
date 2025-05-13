@@ -1,0 +1,193 @@
+# ------------------------------------------ 
+
+#  
+
+#   Project:      VEXcode Project 
+
+#   Author:       VEX 
+
+#   Created: 
+
+#   Description:  VEXcode VR Python Project 
+
+#  
+
+# ------------------------------------------ 
+
+ 
+
+# Library imports 
+
+from vexcode import * 
+
+brain.clear() 
+
+def getLineBrightness(*LineList): 
+
+    global Csum,avg,Linebrg 
+
+    avg=0 
+
+    Csum=0 
+
+     
+
+    for Linebrg in LineList: 
+
+        Csum+=float(Linebrg) 
+
+        wait(5, MSEC) 
+
+    length=len(LineList) 
+
+    avg=Csum/length 
+
+    brain.print(f"average brightness is {avg} for {length} lines") 
+
+     
+
+# Add project code in "main" 
+
+def main(): 
+
+ 
+
+    global control,i,Turn_Control 
+
+    i=0 
+
+    Turn_Control=1 
+
+     
+
+     
+
+    
+
+    monitor_sensor("left_bumper.pressed") 
+
+     
+
+    drivetrain.drive(FORWARD) 
+
+    colors=[] 
+
+     
+
+    while i<=4: 
+
+        
+
+        while not left_bumper.pressed() : 
+
+            control=1 
+
+    #if brightness is less than 100,continue the loop  
+
+    #and control the control variable 
+
+            while down_eye.brightness(PERCENT)<100:  
+
+    #if control variable is not 0, add to colors list the brightness 
+
+                if control!=0: 
+
+                    colors.append(down_eye.brightness(PERCENT)) 
+
+                    control=0 
+
+ 
+
+                    pass 
+
+                wait(5, MSEC) 
+
+                
+
+            wait(5, MSEC) 
+
+    #if bumper is true and i variable is 4, break the loop. 
+
+        if left_bumper.pressed() and i==4: 
+
+            break 
+
+            pass 
+
+    #program is controlling the direction of robot 
+
+        if Turn_Control==1: 
+
+             
+
+            drivetrain.turn_for(RIGHT, 90, DEGREES) 
+
+            drivetrain.drive_for(FORWARD, 400, MM) 
+
+            drivetrain.turn_for(RIGHT,90,DEGREES) 
+
+            drivetrain.drive(FORWARD) 
+
+            Turn_Control=0 
+
+            
+
+         
+
+            pass 
+
+        else: 
+
+             
+
+            drivetrain.turn_for(LEFT, 90, DEGREES) 
+
+            drivetrain.drive_for(FORWARD, 400, MM) 
+
+            drivetrain.turn_for(LEFT,90,DEGREES) 
+
+            drivetrain.drive(FORWARD) 
+
+            Turn_Control=1 
+
+             
+
+                 
+
+            pass  
+
+            
+
+        i=i+1     
+
+        wait(5, MSEC) 
+
+    #run the function. 
+
+    getLineBrightness(*colors) 
+
+    brain.new_line() 
+
+    brain.print(colors) 
+
+    
+
+    drivetrain.stop() 
+
+    stop_project() 
+
+ 
+
+     
+
+ 
+
+# VR threads — Do not delete 
+
+vr_thread(main()) 
+
+ 
+ 
+ 
+
+ 
